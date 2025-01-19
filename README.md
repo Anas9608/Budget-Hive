@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a budget-hive application to add/track your expense along with multiple other
+amazing feature to make to your expense tracking easy.
 
 ## Getting Started
 
