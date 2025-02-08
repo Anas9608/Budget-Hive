@@ -1,7 +1,9 @@
 import HeroSection from "@/components/hero";
+import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { featuresData, statsData, testimonialsData } from "@/data/landing";
 import Image from "next/image";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -18,8 +20,9 @@ export default function Home() {
           })}
         </div>
       </div>
-
     </section>
+
+    {/*features section*/}
     <section className="py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-2">Everything you need to manage your finance</h2>
@@ -37,8 +40,9 @@ export default function Home() {
         </div>
       </div>
     </section>
-    <section className="py-20">
-      <div className="container mx-auto px-4">
+    {/*Testimonials section*/}
+    <section>
+      <div className="container mx-auto px-4 py-8">
         <h2 className="text-3xl font-bold text-center mb-2">What our users say</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonialsData.map((testimonial, idx) => {
@@ -64,5 +68,22 @@ export default function Home() {
         </div>
       </div>
     </section>
+    <section className="py-20 bg-blue-500">
+      <div className="container text-center mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-4 text-white">  Ready to Take Control of Your Finances?</h2>
+        <div className="text-blue-200 mb-8 max-w-2xl mx-auto">
+          <p className="mb-4">
+            Join thousands of users who are already managing their finances
+            smarter with Budget Hive
+          </p>
+          <Link href='/dashboard'>
+            <Button size='lg' className="bg-white text-blue-600 hover:bg-blue-50 animate-bounce">
+              start free trail
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+
   </div>;
 }
