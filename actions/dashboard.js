@@ -1,6 +1,7 @@
 "use server"
 
-import { auth } from "@clerk/nextjs/dist/types/server"
+import { db } from "@/lib/prisma";
+import { auth} from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 function serializeTransaction(data){
@@ -25,7 +26,7 @@ if(data.amount){
 
     //convert balance to float before saving  
     const balanceFloat = parseFloat(data.balance);  
-    if(NaN(balanceFloat)){
+    if(isNaN(balanceFloat)){
         throw new Error("Balance must be a number")
     }
     //check if this is users first account
@@ -44,7 +45,7 @@ if(data.amount){
             ...data,
             balance: balanceFloat,
             isDefault: shouldBeDefault,
-            userId: userId
+            userId: user.id
         }
     });
 
