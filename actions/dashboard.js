@@ -12,7 +12,43 @@ if(data.balance){
 if(data.amount){
     serialized.amount = Number(serialized.amount).toFixed(4);
 }
+return serialized;
 }
+
+
+export async function getUserAccounts() {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+  
+    const user = await db.user.findUnique({
+      where: { clerkUserId: userId },
+    });
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    try {
+      const accounts = await db.account.findMany({
+        where: { userId: user.id },
+        orderBy: { createdAt: "desc" },
+        include: {
+          _count: {
+            select: {
+              transactions: true,
+            },
+          },
+        },
+      });
+
+      // Serialize accounts before sending to client
+      const serializedAccounts = accounts.map((account) => {return serializeTransaction(account)});
+      return serializedAccounts;
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+  
  export async function createAccount(data){
 
     const {userId} =await auth();
