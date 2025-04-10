@@ -40,17 +40,17 @@ export function AccountCard({ account }) {
     await updateDefaultFn(id);
   };
 
-  // useEffect(() => {
-  //   if (updatedAccount?.success) {
-  //     toast.success("Default account updated successfully");
-  //   }
-  // }, [updatedAccount]);
+  useEffect(() => {
+    if (updatedAccount?.success) {
+      toast.success("Default account updated successfully");
+    }
+  }, [updatedAccount]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error.message || "Failed to update default account");
-  //   }
-  // }, [error]);
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message || "Failed to update default account");
+    }
+  }, [error]);
 
   return (
     <Card className="hover:shadow-md transition-shadow group relative">
