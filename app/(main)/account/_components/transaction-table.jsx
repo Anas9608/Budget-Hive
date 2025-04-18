@@ -50,7 +50,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { categoryColors } from "@/data/categories";
-// import { bulkDeleteTransactions } from "@/actions/account";
+import { bulkDeleteTransactions } from "@/actions/account";
 import useFetch from "@/hooks/use-fetch";
 import { BarLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
@@ -161,28 +161,28 @@ export function TransactionTable({ transactions }) {
     );
   };
 
-  // const {
-  //   loading: deleteLoading,
-  //   fn: deleteFn,
-  //   data: deleted,
-  // } = useFetch(bulkDeleteTransactions);
+  const {
+    loading: deleteLoading,
+    fn: deleteFn,
+    data: deleted,
+  } = useFetch(bulkDeleteTransactions);
 
-  // const handleBulkDelete = async () => {
-  //   if (
-  //     !window.confirm(
-  //       `Are you sure you want to delete ${selectedIds.length} transactions?`
-  //     )
-  //   )
-  //     return;
+  const handleBulkDelete = async () => {
+    if (
+      !window.confirm(
+        `Are you sure you want to delete ${selectedIds.length} transactions?`
+      )
+    )
+      return;
 
-  //   deleteFn(selectedIds);
-  // };
+    deleteFn(selectedIds);
+  };
 
-  // useEffect(() => {
-  //   if (deleted && !deleteLoading) {
-  //     toast.error("Transactions deleted successfully");
-  //   }
-  // }, [deleted, deleteLoading]);
+  useEffect(() => {
+    if (deleted && !deleteLoading) {
+      toast.error("Transactions deleted successfully");
+    }
+  }, [deleted, deleteLoading]);
 
   const handleClearFilters = () => {
     setSearchTerm("");
@@ -198,9 +198,9 @@ export function TransactionTable({ transactions }) {
 
   return (
     <div className="space-y-4">
-      {/* {deleteLoading && (
+      {deleteLoading && (
         <BarLoader className="mt-4" width={"100%"} color="#9333ea" />
-      )} */}
+      )}
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
@@ -437,7 +437,7 @@ export function TransactionTable({ transactions }) {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
                           className="text-destructive"
-                        // onClick={() => deleteFn([transaction.id])}
+                          onClick={() => deleteFn([transaction.id])}
                         >
                           Delete
                         </DropdownMenuItem>
